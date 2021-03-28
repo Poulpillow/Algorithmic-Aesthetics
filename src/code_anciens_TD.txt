@@ -1,0 +1,1115 @@
+// TD1
+
+
+    /* TD1 légende
+        Ellipse_x: 180,
+        Ellipse_y: 180,
+        Ellipse_Size: 30,
+        Ellipse_Size_Head: 300,
+        Ellipse_Size_Ears: 150,
+
+        Eyes: 100,
+        Pupils: 15,
+        Mouth: 425,
+        Ellipse_x: 290,
+        Ellipse_y: 300,
+    */
+
+    /* TD1 légende 2
+        gui.add(params, "Ellipse_x", 0, 600, 10)
+        gui.add(params, "Ellipse_y", 0, 600, 10)
+        gui.add(params, "Ellipse_Size", 0, 100, 1)
+        gui.add(params, "Ellipse_Size_Head", 0, 400, 10)
+        gui.add(params, "Ellipse_Size_Ears", 0, 400, 10)
+
+        gui.add(params, "Eyes", 0, 150, 1)
+        gui.add(params, "Pupils", 0, 100, 1)
+        gui.add(params, "Mouth", 0, 1000, 10)
+        gui.add(params, "Ellipse_x", 0, 600, 10)
+        gui.add(params, "Ellipse_y", 0, 600, 10)
+    */
+
+    /* TD1 MICKEY
+        background('white')
+        fill('black')
+        ellipse(width/2,height/2,params.Ellipse_Size_Head)
+        ellipse(params.Ellipse_x,params.Ellipse_y,params.Ellipse_Size_Ears)
+        ellipse(params.Ellipse_x + 300,params.Ellipse_y,params.Ellipse_Size_Ears)
+        fill('grey')
+        ellipse(mouseX, mouseY, params.Ellipse_Size)
+    */
+
+    /* TD 1 MAISON
+        background('green')
+        noStroke()
+        fill('orange')
+        rect(width/2-250, 300, 500, 300)
+        fill('red')
+        triangle(width/2-250, 300, width/2+250, 300, width/2, 200)
+    */
+
+    /* TD1 VISAGE
+        background('#7fe8fa')
+        noStroke()
+
+        fill('#fff2d9')
+        ellipse(width/2,height/2,300,400)
+
+        fill('white')
+        ellipse(params.Ellipse_x,params.Ellipse_y,params.Eyes)
+        ellipse(params.Ellipse_x+100,params.Ellipse_y,params.Eyes)
+
+        fill('#ffae12')
+        ellipse(params.Ellipse_x,params.Ellipse_y,params.Pupils)
+        ellipse(params.Ellipse_x+100,params.Ellipse_y,params.Pupils)
+
+        fill('#f5c25d')
+        ellipse(width/2,params.Mouth,150,80)
+    */
+
+
+// TD2
+
+    /* TD2 légende
+        N: 100,
+
+        Size: 300,
+        Distance: 106,
+        Stroke_Weight: 3,
+    */
+
+    /* TD2 légende 2
+        gui.add(params, "N", 0, 250, 1)
+
+        gui.add(params, "Size", 0, 600, 1)
+        gui.add(params, "Distance", 0, 225, 1)
+        gui.add(params, 'Stroke_Weight', 0, 20, 1)
+    */
+
+    /* TD2
+
+        background('black')
+        randomSeed(0)
+        noStroke()
+        translate(width/2, height/2)
+        for (let i=0 ; i<params.N ; i++)
+        {
+            const angle = random(TWO_PI)
+            let radius = randomGaussian(0, 0.4 * width)
+            while (abs(radius) > 0.4 * width)
+            {
+                radius = randomGaussian(0, 0.4 * width)
+            }
+            const p = p5.Vector.fromAngle(angle).mult(radius)
+
+            fill(255,255,255,50)
+            ellipse(p.x, p.y, random(10,100))
+            
+            // TD2 ellipse
+            fill(random(100,255), 0, random(100,255), random(10,255))
+            ellipse(random(width), random(height), random(10,100))
+            
+
+            //TD2 rectangles
+            rect(random(width), random(height), random(10,100), random(10,100))
+
+
+            //TD2 rosace
+            background('black')
+            stroke('white')
+            strokeWeight(params.Stroke_Weight)
+            fill(127, 232, 250, 100)
+            ellipse(width/2,height/2,params.Size)
+            translate(width/2,height/2)
+            for (let k = 0; k < 6; ++k) 
+            {
+                rotate(TWO_PI/6)
+                ellipse(params.Distance,params.Distance,params.Size)
+            }
+            
+        }
+    */
+
+
+//PROJET RECODAGE
+
+    /* Version la + ancienne
+
+        /* Début fonction draw
+            // Base
+            background('#314C7B')
+            noStroke()
+
+            // Base 2
+            fill('#1664A6')
+            triangle(width/5,0,width,height,0,height)
+
+            // Image figé
+            randomSeed(params.Seed)
+
+            // Cercles aléatoires
+            for (let i=0; i<params.N;i++)
+            {
+                fill(random([
+                    '#CDC15D', //jaune
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#1664A6', //bleu clair
+                    '#1664A6', //bleu clair
+                    '#1664A6', //bleu clair
+                    '#1664A6', //bleu clair
+                    '#226C79', //vert
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                    '#C9C8D0', //blanc
+                    '#C9C8D0'  //blanc
+                ]))
+                ellipse(random(width),random(height),100)
+            }
+
+            // Demi cercles aléatoires (attention rotation)
+            for (let j=0; j<params.M;j++)
+            {
+                push()
+                fill(random([
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                ]))
+                rotate(random(0,TWO_PI))
+                arc(random(width),random(height),100,100,0,random(PI,TWO_PI))
+                pop()
+            }
+
+            
+            // Create the mask
+            pg.background('#E4E3E7')
+            pg.noStroke()
+            pg.fill(0)
+            
+            // Cut a shape in the mask with triangles
+            pg.shader(myShader)
+            pg.triangle(params.x12, params.y1, params.x12, params.y23, params.x3, params.y23)
+            pg.triangle(params.x4, params.y45, params.x56, params.y45, params.x56, params.y6)
+
+            //BONUS mini random triangle
+            pg.triangle(random(100,180), random(290,370), random(100,180), random(-80,0), random(-300,-220), random(-80,0))
+            pg.triangle(random(-160,-80), random(50,130), random(270,350), random(50,130), random(270,350), random(-360,-280))
+            
+
+            // Apply the mask
+            image(pg, 0, 0, width, height)
+        */
+
+        /*Dans double boucle for
+
+            if (c<1)
+            {
+                fill('black')
+                //rect(0,0, width/params.moduledim, height/params.moduledim)
+                rect(0, 0, w, w)
+                fill('white')
+                stroke('white')
+                //arc((width/params.moduledim)/2, 0, (width/params.moduledim), (width/params.moduledim), 0, PI)
+                //arc((width/params.moduledim)/2, (width/params.moduledim), (width/params.moduledim), (width/params.moduledim), PI, TWO_PI)
+                arc(0, -w/2, w, w, 0, PI,CHORD)
+                if (s<1)
+                {
+                    arc(0, 0, w, w, 0, PI,CHORD)
+                }
+                else
+                {
+                    arc(0, +w/2, w, w, PI, TWO_PI,CHORD)
+                }
+                //arc(0, +w/2, w, w, PI, TWO_PI,CHORD)
+            }
+            else
+            {
+                fill('white')
+                //rect(0,0, width/params.moduledim, height/params.moduledim)
+                rect(0, 0, w, w)
+                fill('black')
+                stroke('black')
+                //arc((width/params.moduledim)/2, 0, (width/params.moduledim), (width/params.moduledim), 0, PI)
+                //arc((width/params.moduledim)/2, (width/params.moduledim), (width/params.moduledim), (width/params.moduledim), PI, TWO_PI)
+                arc(0, -w/2, w, w, 0, PI,CHORD)
+                if (s<1)
+                {
+                    arc(0, 0, w, w, 0, PI,CHORD)
+                }
+                else
+                {
+                    arc(0, +w/2, w, w, PI, TWO_PI,CHORD)
+                }
+                //arc(0, +w/2, w, w, PI, TWO_PI,CHORD)
+            }
+        */
+    */
+
+    /* Version totalement random
+
+        //RECODE NEW
+        const w = width / params.moduledim
+        push()
+        noStroke()
+        randomSeed(params.Seed)
+        rectMode(CENTER)
+
+        translate (width/2,height/2)
+        rotate(2*PI/3)
+        translate (-width/2,-height/2)
+
+        for (let i=-params.moduledim/2; i<params.moduledim*1.5; i++)
+        {
+            for (let j=-params.moduledim/2; j<params.moduledim*1.5; j++)
+            {
+                push()
+                translate((i+0.5) * w, (j+0.5) * w)
+                r=random(0,3) //random rotation
+                s=random(0,2) //random sens demi cercle
+                c=random(0,2) //random couleur noir/blanc
+
+                
+                if (r<0.5)
+                {
+                    rotate(PI/2)
+                }
+                else if (r>0.5 && r<1.5)
+                {
+                    rotate(PI)
+                }
+                else if (r>1.5 && r<2.5)
+                {
+                    rotate(3*PI/2)
+                }
+
+                // Version couleur
+                const col = random([
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#1664A6', //bleu clair
+                    '#1664A6', //bleu clair
+                    '#1664A6', //bleu clair
+                    '#1664A6', //bleu clair
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                    '#C9C8D0', //blanc
+                ])
+                fill(col)
+                rect(0, 0, w, w)
+                const col1 = random([
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#1664A6', //bleu clair
+                    '#1664A6', //bleu clair
+                    '#1664A6', //bleu clair
+                    '#1664A6', //bleu clair
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                    '#C9C8D0', //blanc
+                    '#C9C8D0'  //blanc
+                    '#CDC15D', //jaune
+                    '#226C79' //vert
+                ])
+                fill(col1)
+                stroke(col1)
+                arc(0, -w/2, w, w, 0, PI,CHORD)
+                const col2 = random([
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#1664A6', //bleu clair
+                    '#1664A6', //bleu clair
+                    '#1664A6', //bleu clair
+                    '#1664A6', //bleu clair
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                    '#C9C8D0', //blanc
+                    '#C9C8D0'  //blanc
+                    '#CDC15D', //jaune
+                    '#226C79' //vert
+                ])
+                const totcol2=random([col2,col])
+                fill(totcol2)
+                stroke(totcol2)
+                if (s<1)
+                {
+                    arc(0, 0, w, w, 0, PI,CHORD)
+                }
+                else
+                {
+                    arc(0, +w/2, w, w, PI, TWO_PI,CHORD)
+                }
+                
+                pop()
+            }
+        }
+        pop()
+
+        // Create the mask
+        pg.background('#E4E3E7')
+        pg.noStroke()
+        pg.fill(0)
+
+        // Cut a shape in the mask with triangles
+        pg.shader(myShader)
+        pg.triangle(params.x12, params.y1, params.x12, params.y23, params.x3, params.y23)
+        pg.triangle(params.x4, params.y45, params.x56, params.y45, params.x56, params.y6)
+
+        // Apply the mask
+        image(pg, 0, 0, width, height)
+    */
+
+    /* Version 1 avec moins de random
+        const w = width / params.moduledim
+        push()
+
+        //COMMANDES DE BASE
+        noStroke()
+        randomSeed(params.Seed)
+        rectMode(CENTER)
+
+        //ROTATION GRILLE
+        translate (width/2,height/2)
+        rotate(2*PI/3)
+        translate (-width/2,-height/2)
+
+        //CREATION GRILLE ET ARC
+        for (let i=-params.moduledim/2; i<params.moduledim*1.5; i++)
+        {
+            for (let j=-params.moduledim/2; j<params.moduledim*1.5; j++)
+            {
+                push()
+
+                translate((i+0.5) * w, (j+0.5) * w)
+                r=random(0,3) //random rotation
+                s=random(0,2) //random sens demi cercle
+                c=random(0,2) //random couleur noir/blanc
+
+                //ROTATION RANDOM
+                if (r<0.5)
+                {
+                    rotate(PI/2)
+                }
+                else if (r>0.5 && r<1.5)
+                {
+                    rotate(PI)
+                }
+                else if (r>1.5 && r<2.5)
+                {
+                    rotate(3*PI/2)
+                }
+
+                // COULEURS RANDOM
+                if (i>params.moduledim/4)
+                {
+                    //CARRE
+                    const col = random([
+                        '#1664A6', //bleu clair
+                        '#1664A6', //bleu clair
+                        '#1664A6', //bleu clair
+                        '#1664A6', //bleu clair
+                        '#1664A6', //bleu clair
+                        '#1664A6', //bleu clair
+                        '#1664A6', //bleu clair
+                        '#5A4F57', //marron
+                        '#5A4F57', //marron
+                        '#C9C8D0', //blanc
+                    ])
+                    fill(col)
+                    rect(0, 0, w, w)
+
+                    //ARC 1
+                    const col1 = random([
+                        '#314C7B', //bleu foncé
+                        '#314C7B', //bleu foncé
+                        '#1664A6', //bleu clair
+                        '#1664A6', //bleu clair
+                        '#1664A6', //bleu clair
+                        '#1664A6', //bleu clair
+                        '#5A4F57', //marron
+                        '#5A4F57', //marron
+                        '#5A4F57', //marron
+                        '#C9C8D0', //blanc
+                        '#C9C8D0'  //blanc
+                    ])
+                    fill(col1)
+                    stroke(col1)
+                    arc(0, -w/2, w, w, 0, PI,CHORD)
+
+                    //ARC 2
+                    const col2 = random([
+                        '#314C7B', //bleu foncé
+                        '#314C7B', //bleu foncé
+                        '#1664A6', //bleu clair
+                        '#1664A6', //bleu clair
+                        '#1664A6', //bleu clair
+                        '#1664A6', //bleu clair
+                        '#5A4F57', //marron
+                        '#5A4F57', //marron
+                        '#5A4F57', //marron
+                        '#C9C8D0', //blanc
+                        '#C9C8D0'  //blanc
+                    ])
+                    const totcol2=random([col2,col])
+                    fill(totcol2)
+                    stroke(totcol2)
+                    if (s<1)
+                    {
+                        arc(0, 0, w, w, 0, PI,CHORD)
+                    }
+                    else
+                    {
+                        arc(0, +w/2, w, w, PI, TWO_PI,CHORD)
+                    }
+                }
+                else
+                {
+                    //CARRE
+                    const col = random([
+                        '#314C7B', //bleu foncé
+                        '#314C7B', //bleu foncé
+                        '#314C7B', //bleu foncé
+                        '#314C7B', //bleu foncé
+                        '#314C7B', //bleu foncé
+                        '#314C7B', //bleu foncé
+                        '#314C7B', //bleu foncé
+                        '#C9C8D0', //blanc
+                        '#C9C8D0', //blanc
+                    ])
+                    fill(col)
+                    rect(0, 0, w, w)
+
+                    //ARC 1
+                    const col1 = random([
+                        '#CDC15D', //jaune
+                        '#314C7B', //bleu foncé
+                        '#314C7B', //bleu foncé
+                        '#314C7B', //bleu foncé
+                        '#314C7B', //bleu foncé
+                        '#1664A6', //bleu clair
+                        '#1664A6', //bleu clair
+                        '#226C79', //vert
+                        '#5A4F57' //marron
+                    ])
+                    fill(col1)
+                    stroke(col1)
+                    arc(0, -w/2, w, w, 0, PI,CHORD)
+
+                    //ARC 2
+                    const col2 = random([
+                        '#CDC15D', //jaune
+                        '#314C7B', //bleu foncé
+                        '#314C7B', //bleu foncé
+                        '#314C7B', //bleu foncé
+                        '#314C7B', //bleu foncé
+                        '#1664A6', //bleu clair
+                        '#1664A6', //bleu clair
+                        '#226C79', //vert
+                        '#5A4F57' //marron
+                    ])
+                    fill(col2)
+                    stroke(col2)
+                    if (s<1)
+                    {
+                        arc(0, 0, w, w, 0, PI,CHORD)
+                    }
+                    else
+                    {
+                        arc(0, +w/2, w, w, PI, TWO_PI,CHORD)
+                    }
+                }
+                pop()
+            }
+        }
+        pop()
+
+        // Create the mask
+        pg.background('#E4E3E7')
+        pg.noStroke()
+        pg.fill(0)
+
+        // Cut a shape in the mask with triangles
+        pg.shader(myShader)
+        pg.triangle(params.x12, params.y1, params.x12, params.y23, params.x3, params.y23)
+        pg.triangle(params.x4, params.y45, params.x56, params.y45, params.x56, params.y6)
+
+        // Apply the mask
+        image(pg, 0, 0, width, height)
+    */
+
+    /* Version récente
+        // -------------------
+        //  Parameters and UI
+        // -------------------
+
+        let pg: p5.Graphics
+        let myShader: p5.Shader
+
+        let r=0 //random rotation
+        let s=0 //random sens demi cercle
+        let c=0 //random couleur noir/blanc
+
+        const gui = new dat.GUI()
+        const params = {
+            //RANDOM
+            Seed: 166,
+
+            //ANCIENNE VERSION AVEC NOMBRE CERCLE ET DEMI CERCLE
+            N: 20,
+            M: 5,
+
+            //COORD POINTS MASQUE
+            x12: 140,
+            y1: 330,
+            y23: -40,
+            x3: -260,
+            x4: -120,
+            y45: 90,
+            x56: 310,
+            y6: -320,
+
+            //NOMBRE CARRE GRILLE SUR UNE LIGNE
+            moduledim: 6,
+
+            //IDEE CHGT COULEUR
+            couleur: 0,
+
+            Download_Image: () => save(),
+        }
+
+        gui.add(params, "x12", -600, 600, 10)
+        gui.add(params, "y1", -600, 600, 10)
+        gui.add(params, "y23", -600, 600, 10)
+        gui.add(params, "x3", -600, 600, 10)
+        gui.add(params, "x4", -600, 600, 10)
+        gui.add(params, "y45", -600, 600, 10)
+        gui.add(params, "x56", -600, 600, 10)
+        gui.add(params, "y6", -600, 600, 10)
+
+        gui.add(params, "N", 1, 50, 1)
+        gui.add(params, "M", 1, 10, 1)
+
+        gui.add(params, "Seed", 0, 255, 1)
+
+        gui.add(params, "moduledim", 1, 10, 1)
+
+        gui.add(params, "couleur", 0, 3, 1)
+
+        gui.add(params, "Download_Image")
+
+        // -------------------
+        //       Drawing
+        // -------------------
+
+        function draw() 
+        {
+            //VERSION PALLETTE
+            const w = width / params.moduledim
+            push()
+            noStroke()
+            randomSeed(params.Seed)
+            rectMode(CENTER)
+
+            translate (width/2,height/2)
+            rotate(2*PI/3)
+            translate (-width/2,-height/2)
+
+            for (let i=-params.moduledim/2; i<params.moduledim*1.5; i++)
+            {
+                for (let j=-params.moduledim/2; j<params.moduledim*1.5; j++)
+                {
+                    push()
+                    translate((i+0.5) * w, (j+0.5) * w)
+                    r=random(0,3) //random rotation
+                    s=random(0,2) //random sens demi cercle
+                    c=random(0,2) //random couleur noir/blanc
+
+                    
+                    if (r<0.5)
+                    {
+                        rotate(PI/2)
+                    }
+                    else if (r>0.5 && r<1.5)
+                    {
+                        rotate(PI)
+                    }
+                    else if (r>1.5 && r<2.5)
+                    {
+                        rotate(3*PI/2)
+                    }
+
+                    // Version couleur
+                    if (params.couleur==0)
+                    {
+                        const col = random([
+                            '#314C7B', //bleu foncé
+                            '#314C7B', //bleu foncé
+                            '#314C7B', //bleu foncé
+                            '#314C7B', //bleu foncé
+                            '#1664A6', //bleu clair
+                            '#1664A6', //bleu clair
+                            '#1664A6', //bleu clair
+                            '#1664A6', //bleu clair
+                            '#5A4F57', //marron
+                            '#5A4F57', //marron
+                            '#C9C8D0' //blanc
+                        ])
+                        fill(col)
+                        rect(0, 0, w, w)
+
+                        const col1 = random([
+                            '#314C7B', //bleu foncé
+                            '#314C7B', //bleu foncé
+                            '#314C7B', //bleu foncé
+                            '#314C7B', //bleu foncé
+                            '#1664A6', //bleu clair
+                            '#1664A6', //bleu clair
+                            '#1664A6', //bleu clair
+                            '#1664A6', //bleu clair
+                            '#5A4F57', //marron
+                            '#5A4F57', //marron
+                            '#5A4F57', //marron
+                            '#C9C8D0', //blanc
+                            '#C9C8D0',  //blanc
+                            '#CDC15D', //jaune
+                            '#226C79'  //vert
+                        ])
+                        fill(col1)
+                        stroke(col1)
+                        arc(0, -w/2, w, w, 0, PI,CHORD)
+
+                        const col2 = random([
+                            '#314C7B', //bleu foncé
+                            '#314C7B', //bleu foncé
+                            '#314C7B', //bleu foncé
+                            '#314C7B', //bleu foncé
+                            '#1664A6', //bleu clair
+                            '#1664A6', //bleu clair
+                            '#1664A6', //bleu clair
+                            '#1664A6', //bleu clair
+                            '#5A4F57', //marron
+                            '#5A4F57', //marron
+                            '#5A4F57', //marron
+                            '#C9C8D0', //blanc
+                            '#C9C8D0', //blanc
+                            '#CDC15D', //jaune
+                            '#226C79'  //vert
+                        ])
+                        fill(col2)
+                        stroke(col2)
+                        if (s<1)
+                        {
+                            arc(0, 0, w, w, 0, PI,CHORD)
+                        }
+                        else
+                        {
+                            arc(0, +w/2, w, w, PI, TWO_PI,CHORD)
+                        }
+                        
+                    }
+                    
+                    else if (params.couleur==1)
+                    {
+                        const col = random([
+                            '#ff9d00', //orange foncé
+                            '#ff9d00', //orange foncé
+                            '#ff9d00', //orange foncé
+                            '#ff9d00', //orange foncé
+                            '#ffc929', //orange clair
+                            '#ffc929', //orange clair
+                            '#ffc929', //orange clair
+                            '#ffc929', //orange clair
+                            '#5d686e', //marron bleu
+                            '#5d686e', //marron bleu
+                            '#daebf5' //blanc bleu
+                        ])
+                        fill(col)
+                        rect(0, 0, w, w)
+
+                        const col1 = random([
+                            '#ff9d00', //orange foncé
+                            '#ff9d00', //orange foncé
+                            '#ff9d00', //orange foncé
+                            '#ff9d00', //orange foncé
+                            '#ffc929', //orange clair
+                            '#ffc929', //orange clair
+                            '#ffc929', //orange clair
+                            '#ffc929', //orange clair
+                            '#5d686e', //marron bleu
+                            '#5d686e', //marron bleu
+                            '#5d686e', //marron bleu
+                            '#daebf5', //blanc bleu
+                            '#daebf5', //blanc bleu
+                            '#b481e3', //violet
+                            '#e181e3'  //rose
+                        ])
+                        fill(col1)
+                        stroke(col1)
+                        arc(0, -w/2, w, w, 0, PI,CHORD)
+
+                        const col2 = random([
+                            '#ff9d00', //orange foncé
+                            '#ff9d00', //orange foncé
+                            '#ff9d00', //orange foncé
+                            '#ff9d00', //orange foncé
+                            '#ffc929', //orange clair
+                            '#ffc929', //orange clair
+                            '#ffc929', //orange clair
+                            '#ffc929', //orange clair
+                            '#5d686e', //marron bleu
+                            '#5d686e', //marron bleu
+                            '#5d686e', //marron bleu
+                            '#daebf5', //blanc bleu
+                            '#daebf5', //blanc bleu
+                            '#b481e3', //violet
+                            '#e181e3'  //rose
+                        ])
+                        fill(col2)
+                        stroke(col2)
+                        if (s<1)
+                        {
+                            arc(0, 0, w, w, 0, PI,CHORD)
+                        }
+                        else
+                        {
+                            arc(0, +w/2, w, w, PI, TWO_PI,CHORD)
+                        }
+                    
+                    }
+
+                    else if (params.couleur==2)
+                    {
+                        const col = random([
+                            '#60a138', //vert foncé
+                            '#60a138', //vert foncé
+                            '#60a138', //vert foncé
+                            '#60a138', //vert foncé
+                            '#c6ff63', //vert clair
+                            '#c6ff63', //vert clair
+                            '#c6ff63', //vert clair
+                            '#c6ff63', //vert clair
+                            '#535426', //marron jaune
+                            '#535426', //marron jaune
+                            '#fdffb8'  //blanc jaune
+                        ])
+                        fill(col)
+                        rect(0, 0, w, w)
+
+                        const col1 = random([ 
+                            '#60a138', //vert foncé
+                            '#60a138', //vert foncé
+                            '#60a138', //vert foncé
+                            '#60a138', //vert foncé
+                            '#c6ff63', //vert clair
+                            '#c6ff63', //vert clair
+                            '#c6ff63', //vert clair
+                            '#c6ff63', //vert clair
+                            '#535426', //marron jaune
+                            '#535426', //marron jaune
+                            '#535426', //marron jaune
+                            '#fdffb8', //blanc jaune
+                            '#fdffb8', //blanc jaune
+                            '#f74848', //rouge
+                            '#f56ea4'  //rose
+                        ])
+                        fill(col1)
+                        stroke(col1)
+                        arc(0, -w/2, w, w, 0, PI,CHORD)
+
+                        const col2 = random([ 
+                            '#60a138', //vert foncé
+                            '#60a138', //vert foncé
+                            '#60a138', //vert foncé
+                            '#60a138', //vert foncé
+                            '#c6ff63', //vert clair
+                            '#c6ff63', //vert clair
+                            '#c6ff63', //vert clair
+                            '#c6ff63', //vert clair
+                            '#535426', //marron jaune
+                            '#535426', //marron jaune
+                            '#535426', //marron jaune
+                            '#fdffb8', //blanc jaune
+                            '#fdffb8', //blanc jaune
+                            '#f74848', //rouge
+                            '#f56ea4'  //rose
+                        ])
+                        fill(col2)
+                        stroke(col2)
+                        if (s<1)
+                        {
+                            arc(0, 0, w, w, 0, PI,CHORD)
+                        }
+                        else
+                        {
+                            arc(0, +w/2, w, w, PI, TWO_PI,CHORD)
+                        }
+                    }
+
+                    else if (params.couleur==3)
+                    {
+                        const col = random([
+                            '#631573', //violet foncé
+                            '#631573', //violet foncé
+                            '#631573', //violet foncé
+                            '#631573', //violet foncé
+                            '#bd5ad1', //violet clair
+                            '#bd5ad1', //violet clair
+                            '#bd5ad1', //violet clair
+                            '#bd5ad1', //violet clair
+                            '#1d185e', //marron bleu
+                            '#1d185e', //marron bleu
+                            '#d5d3f2' //blanc bleu
+                        ])
+                        fill(col)
+                        rect(0, 0, w, w)
+
+                        const col1 = random([
+                            '#631573', //violet foncé
+                            '#631573', //violet foncé
+                            '#631573', //violet foncé
+                            '#631573', //violet foncé
+                            '#bd5ad1', //violet clair
+                            '#bd5ad1', //violet clair
+                            '#bd5ad1', //violet clair
+                            '#bd5ad1', //violet clair
+                            '#1d185e', //marron bleu
+                            '#1d185e', //marron bleu
+                            '#1d185e', //marron bleu
+                            '#d5d3f2', //blanc bleu
+                            '#d5d3f2', //blanc bleu
+                            '#76e8c6', //turquoise
+                            '#76e2e8' //bleu
+                        ])
+                        fill(col1)
+                        stroke(col1)
+                        arc(0, -w/2, w, w, 0, PI,CHORD)
+
+                        const col2 = random([
+                            '#631573', //violet foncé
+                            '#631573', //violet foncé
+                            '#631573', //violet foncé
+                            '#631573', //violet foncé
+                            '#bd5ad1', //violet clair
+                            '#bd5ad1', //violet clair
+                            '#bd5ad1', //violet clair
+                            '#bd5ad1', //violet clair
+                            '#1d185e', //marron bleu
+                            '#1d185e', //marron bleu
+                            '#1d185e', //marron bleu
+                            '#d5d3f2', //blanc bleu
+                            '#d5d3f2', //blanc bleu
+                            '#76e8c6', //turquoise
+                            '#76e2e8' //bleu
+                        ])
+                        fill(col2)
+                        stroke(col2)
+                        if (s<1)
+                        {
+                            arc(0, 0, w, w, 0, PI,CHORD)
+                        }
+                        else
+                        {
+                            arc(0, +w/2, w, w, PI, TWO_PI,CHORD)
+                        }
+                    }
+                    
+                    pop()
+                }
+            }
+            pop()
+
+            // Create the mask
+            pg.background('#E4E3E7')
+            pg.noStroke()
+            pg.fill(0)
+
+            // Cut a shape in the mask with triangles
+            //pg.shader(myShader)
+            //pg.triangle(params.x12 + 50 * sin(frameCount * 0.04), params.y1+ 50 * sin(frameCount * 0.04), params.x12+ 50 * sin(frameCount * 0.04), params.y23+ 50 * sin(frameCount * 0.04), params.x3+ 50 * sin(frameCount * 0.04), params.y23+ 50 * sin(frameCount * 0.04))
+            //pg.triangle(params.x4+ 50 * sin(frameCount * 0.04), params.y45+ 50 * sin(frameCount * 0.04), params.x56+ 50 * sin(frameCount * 0.04), params.y45+ 50 * sin(frameCount * 0.04), params.x56+ 50 * sin(frameCount * 0.04), params.y6+ 50 * sin(frameCount * 0.04))
+
+            //VERSION RANDOM
+            pg.shader(myShader)
+            pg.triangle(params.x12 + random(-40,40), params.y1+ random(-40,40), params.x12+random(-40,40), params.y23+ random(-40,40), params.x3+ random(-40,40), params.y23+random(-40,40))
+            pg.triangle(params.x4+random(-40,40), params.y45+ random(-40,40), params.x56+ random(-40,40), params.y45+ random(-40,40), params.x56+ random(-40,40), params.y6+ random(-40,40))
+
+            // Apply the mask
+            image(pg, 0, 0, width, height)
+
+
+        }
+
+        // -------------------
+        //    Initialization
+        // -------------------
+
+        function preload() {
+            myShader = loadShader("shader/myShader.vert", "shader/myShader.frag")
+        }
+
+        function setup() {
+            p6_CreateCanvas()
+            pg = createGraphics(width, height, WEBGL)
+        }
+
+        function windowResized() {
+            p6_ResizeCanvas()
+            pg.resizeCanvas(width, height)
+        }
+
+        function mousePressed() {
+            params.Seed=params.Seed+1
+        }
+    */
+
+// PALETTE 0
+const col = random([
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#1664A6', //bleu clair
+                    '#1664A6', //bleu clair
+                    '#1664A6', //bleu clair
+                    '#1664A6', //bleu clair
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                    '#C9C8D0', //blanc
+                ])
+
+const col1 = random([
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#314C7B', //bleu foncé
+                    '#1664A6', //bleu clair
+                    '#1664A6', //bleu clair
+                    '#1664A6', //bleu clair
+                    '#1664A6', //bleu clair
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                    '#5A4F57', //marron
+                    '#C9C8D0', //blanc
+                    '#C9C8D0'  //blanc
+                    '#CDC15D', //jaune
+                    '#226C79' //vert
+                ])
+
+// PALETTE 1
+const col = random([
+                    '#ff9d00', //orange foncé
+                    '#ff9d00', //orange foncé
+                    '#ff9d00', //orange foncé
+                    '#ff9d00', //orange foncé
+                    '#ffc929', //orange clair
+                    '#ffc929', //orange clair
+                    '#ffc929', //orange clair
+                    '#ffc929', //orange clair
+                    '#5d686e', //marron bleu
+                    '#5d686e', //marron bleu
+                    '#daebf5', //blanc bleu
+                ])
+
+const col1 = random([
+                    '#ff9d00', //orange foncé
+                    '#ff9d00', //orange foncé
+                    '#ff9d00', //orange foncé
+                    '#ff9d00', //orange foncé
+                    '#ffc929', //orange clair
+                    '#ffc929', //orange clair
+                    '#ffc929', //orange clair
+                    '#ffc929', //orange clair
+                    '#5d686e', //marron bleu
+                    '#5d686e', //marron bleu
+                    '#5d686e', //marron bleu
+                    '#daebf5', //blanc bleu
+                    '#daebf5', //blanc bleu
+                    '#b481e3', //violet
+                    '#e181e3' //rose
+                ])
+
+// PALETTE 2
+const col = random([
+                    '#60a138', //vert foncé
+                    '#60a138', //vert foncé
+                    '#60a138', //vert foncé
+                    '#60a138', //vert foncé
+                    '#c6ff63', //vert clair
+                    '#c6ff63', //vert clair
+                    '#c6ff63', //vert clair
+                    '#c6ff63', //vert clair
+                    '#535426', //marron jaune
+                    '#535426', //marron jaune
+                    '#fdffb8' //blanc jaune
+                ])
+
+const col1 = random([ 
+                    '#60a138', //vert foncé
+                    '#60a138', //vert foncé
+                    '#60a138', //vert foncé
+                    '#60a138', //vert foncé
+                    '#c6ff63', //vert clair
+                    '#c6ff63', //vert clair
+                    '#c6ff63', //vert clair
+                    '#c6ff63', //vert clair
+                    '#535426', //marron jaune
+                    '#535426', //marron jaune
+                    '#535426', //marron jaune
+                    '#fdffb8' //blanc jaune
+                    '#fdffb8' //blanc jaune
+                    '#f74848', //rouge
+                    '#f56ea4' //rose
+                ])
+
+// PALETTE 3
+const col = random([
+                    '#631573', //violet foncé
+                    '#631573', //violet foncé
+                    '#631573', //violet foncé
+                    '#631573', //violet foncé
+                    '#bd5ad1', //violet clair
+                    '#bd5ad1', //violet clair
+                    '#bd5ad1', //violet clair
+                    '#bd5ad1', //violet clair
+                    '#1d185e', //marron bleu
+                    '#1d185e', //marron bleu
+                    '#d5d3f2', //blanc bleu
+                ])
+
+const col1 = random([
+                    '#631573', //violet foncé
+                    '#631573', //violet foncé
+                    '#631573', //violet foncé
+                    '#631573', //violet foncé
+                    '#bd5ad1', //violet clair
+                    '#bd5ad1', //violet clair
+                    '#bd5ad1', //violet clair
+                    '#bd5ad1', //violet clair
+                    '#1d185e', //marron bleu
+                    '#1d185e', //marron bleu
+                    '#1d185e', //marron bleu
+                    '#d5d3f2', //blanc bleu
+                    '#d5d3f2', //blanc bleu
+                    '#76e8c6', //turquoise
+                    '#76e2e8' //bleu
+                ])
